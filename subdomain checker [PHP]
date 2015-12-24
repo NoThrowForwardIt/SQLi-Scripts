@@ -1,0 +1,29 @@
+<?php
+ 
+/*
+ 
+subdomain checker coded by Mr.MaGnoM
+ 
+this script is gift for my friend Evoo he want me to help u and now i doo :)
+ 
+use it with cmd
+ 
+php script.php 'name of ur domain'
+ 
+domaine without http://
+*/
+ 
+  if(!$argv[1]){
+     die("\n usage $argv[0] 'name of ur domain' \n");
+   }
+    if(eregi("http://",$argv[1])){
+      die("\n pls domain without htpp:// \n");
+    }else{
+$g=@file_get_contents("http://www.pagesinventory.com/search/?s=$argv[1]");
+@preg_match_all('#<td><a href="\/domain\/(.*?).html">#',$g,$matches) ;
+ 
+foreach ($matches[1] as $ul){
+  echo "http://".$ul."/"."\n";
+}
+ }
+?>
